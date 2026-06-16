@@ -9,6 +9,7 @@ class User(Base):
     id=Column(Integer,primary_key=True,autoincrement=True)
     name=Column(String(100),nullable=False)
     email=Column(String(254),unique=True,nullable=False)
+    gender=Column(Enum("MALE","FEMALE","OTHER"),nullable=False)
     hashed_password=Column(String(255),nullable=False)
     age=Column(Integer,nullable=False)
     height=Column(Float,nullable=False)
