@@ -1,24 +1,23 @@
 from pydantic import BaseModel,Field,EmailStr
-from  typing import Optional
-from datetime import datetime,UTC
+from datetime import datetime
 from enum import Enum
 
 class Goal(str,Enum):
-    HYPERTROPHY="hypertrophy"
-    STRENGTH="strength"
-    FAT_LOSS="fat_loss"
-    ENDURANCE="endurance"
-    NOT_SURE="not_sure"
+    HYPERTROPHy="HYPERTROPHY"
+    STRENGTH="STRENGTH"
+    FAT_LOSS="FAT_LOSS"
+    ENDURANCE="ENDURANCE"
+    NOT_SURE="NOT_SURE"
     
 class Gender(str,Enum):
-    MALE="male"
-    FEMALE="female"
-    OTHER="other"
+    MALE="MALE"
+    FEMALE="FEMALE"
+    OTHER="OTHER"
 
 class UserCreate(BaseModel):
     name:str=Field(max_length=100,title="UserName",description="Username of user",example="Larry Wheels")
     email:EmailStr=Field(title="Email",description="Unique User Email",example="abc123@gmail.com")
-    password:str=Field(min_length=6,title="Password",description="Enter User Password")
+    password:str=Field(min_length=6,max_length=72,title="Password",description="Enter User Password")
     age:int=Field(ge=16,lt=100,title="Age",description="Enter age of User")
     height:float=Field(gt=0,title="Height",description="Enter height of user")
     goal: Goal
@@ -26,7 +25,7 @@ class UserCreate(BaseModel):
     
 
 class UserResponse(BaseModel):
-    d: int
+    id: int
     name: str
     email: EmailStr
     age: int

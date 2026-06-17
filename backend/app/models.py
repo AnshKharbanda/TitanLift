@@ -9,7 +9,7 @@ class User(Base):
     id=Column(Integer,primary_key=True,autoincrement=True)
     name=Column(String(100),nullable=False)
     email=Column(String(254),unique=True,nullable=False)
-    gender=Column(Enum("MALE","FEMALE","OTHER"),nullable=False)
+    gender=Column(Enum("MALE","FEMALE","OTHER",name="gender_enum"),nullable=False)
     hashed_password=Column(String(255),nullable=False)
     age=Column(Integer,nullable=False)
     height=Column(Float,nullable=False)
@@ -49,7 +49,7 @@ class Exercise(Base):
     muscle_group=Column(Enum("CHEST","BACK","LEGS","BICEPS","TRICEPS","SHOULDERS","ABS",name="muscle_group_enum"),nullable=False)
     description=Column(Text,nullable=True)
     
-    workout_exercises=relationship("Exercise",back_populates="exercise")
+    workout_exercises=relationship("WorkoutExercise",back_populates="exercise")
     
 class WorkoutExercise(Base):
     __tablename__="workout_exercises"
