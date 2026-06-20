@@ -4,7 +4,7 @@ from app.schemas.weightlog import WeightlogCreate,WeightlogResponse
 from app.security import get_current_user
 from app.models import WeightLog,User
 from app.database import get_db
-from typing import list
+from typing import List
 
 weight_log_router=APIRouter(prefix="/weightlog",tags=["WeightLog"])
 
@@ -21,7 +21,7 @@ def create_weightlog(weightlog:WeightlogCreate,current_user:User=Depends(get_cur
     
     return new_weight_log
 
-@weight_log_router.get("/",response_model=list[WeightlogResponse])
+@weight_log_router.get("/",response_model=List[WeightlogResponse])
 def all_weightlogs(current_user:User=Depends(get_current_user),db:Session=Depends(get_db)):
     weight_logs=db.query(WeightLog).filter(WeightLog.user_id==current_user.id).all()
     

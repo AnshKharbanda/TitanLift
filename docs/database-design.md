@@ -71,7 +71,6 @@ Represents a workout session created by a user.
 | id         | UUID / Integer | Primary Key          |
 | user_id    | Foreign Key    | References Users     |
 | title      | String         | Workout name         |
-| started_at | Timestamp      | Workout date/time    |
 | created_at | Timestamp      | Record creation time |
 
 

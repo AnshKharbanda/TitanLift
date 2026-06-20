@@ -4,7 +4,7 @@ from app.schemas.exercise import ExerciseCreate,ExerciseResponse
 from app.security import get_current_user
 from app.models import Exercise,User
 from app.database import get_db
-from typing import list
+from typing import List
 
 exercise_router=APIRouter(prefix="/exercise",tags=["Exercise"])
 
@@ -22,7 +22,7 @@ def create_exercise(exercise:ExerciseCreate,db:Session=Depends(get_db)):
     
     return new_exercise
     
-@exercise_router.get("/",response_model=list[ExerciseResponse])
+@exercise_router.get("/",response_model=List[ExerciseResponse])
 def all_exercises(db:Session=Depends(get_db)):
     exercises=db.query(Exercise).all()
     

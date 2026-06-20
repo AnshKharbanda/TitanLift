@@ -88,14 +88,14 @@ def get_me(current_user: User = Depends(get_current_user)):
         "email": current_user.email
     }
     
-@auth_router.get("/test-token/{token}")
-def test_token(token: str):
-    return decode_access_token(token)
+# @auth_router.get("/test-token/{token}")
+# def test_token(token: str):
+#     return decode_access_token(token)
 
 
-from app.security import oauth2_scheme
+# from app.security import oauth2_scheme
 
-@auth_router.get("/debug")
-def debug(token: str = Depends(oauth2_scheme)):
-    print("TOKEN RECEIVED:", token)
-    return {"token": token}
+# @auth_router.get("/debug")
+# def debug(token: str = Depends(oauth2_scheme)):
+#     print("TOKEN RECEIVED:", token)
+#     return {"token": token}

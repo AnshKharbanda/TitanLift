@@ -4,7 +4,7 @@ from app.schemas.workout import WorkoutResponse,WorkoutCreate
 from app.security import get_current_user
 from app.models import User,Workout
 from app.database import get_db
-from typing import list
+from typing import List
 
 
 workout_router=APIRouter(prefix="/workout",tags=["Workout"])
@@ -24,7 +24,7 @@ def create_workout(workout:WorkoutCreate,current_user:User=Depends(get_current_u
     return new_workout
     
     
-@workout_router.get("/",response_model=list[WorkoutResponse])
+@workout_router.get("/",response_model=List[WorkoutResponse])
 def all_workouts(current_user:User=Depends(get_current_user),db:Session=Depends(get_db)):
     workouts=db.query(Workout).filter(Workout.user_id==current_user.id).all()
     
