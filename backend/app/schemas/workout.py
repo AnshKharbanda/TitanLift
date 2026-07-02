@@ -14,3 +14,7 @@ class WorkoutResponse(BaseModel):
     model_config = {
         "from_attributes": True
     }
+    
+class RecentWorkoutResponse(BaseModel):
+    title:str
+    created_at:datetime

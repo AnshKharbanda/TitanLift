@@ -40,3 +40,5 @@ def delete_weight_log(id:int,current_user:User=Depends(get_current_user),db:Sess
     return {
         "message":"Weight Log Deleted Successfully"
     }
+    
+
