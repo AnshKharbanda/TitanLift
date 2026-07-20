@@ -112,13 +112,13 @@ class Squat:
         self.hip_angle = self.angle_calculator.calculate_angle(
             shoulder,
             hip,
-            knee,
+            knee
         )
 
         self.knee_angle = self.angle_calculator.calculate_angle(
             hip,
             knee,
-            ankle,
+            ankle
         )
 
         self.min_knee_angle = min(
