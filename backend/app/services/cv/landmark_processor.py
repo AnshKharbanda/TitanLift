@@ -1,4 +1,4 @@
-from types import Point,PoseData
+from .types import Point,PoseData
 import mediapipe as mp
 
 LANDMARK_MAPPING = {
