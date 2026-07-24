@@ -47,31 +47,3 @@ class DocumentCleaner:
         return removed
 
 
-
-documents = [
-    Document(
-        page_content="Muscle hyper-\ntrophy   is\n\nimportant.",
-        metadata={"source_type": "pdf"}
-    ),
-
-    Document(
-        page_content="[Music] Today   we're learning\npush-ups. [Applause]",
-        metadata={"source_type": "youtube"}
-    ),
-
-    Document(
-        page_content="     ",
-        metadata={"source_type": "pdf"}
-    )
-]
-
-
-cleaner = DocumentCleaner()
-
-cleaned_documents = cleaner.clean(documents)
-
-
-for doc in cleaned_documents:
-    print(doc.page_content)
-    print(doc.metadata)
-    print("-----")

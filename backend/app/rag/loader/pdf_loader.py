@@ -21,10 +21,3 @@ class PDFLoader(BaseLoader):
         return documents
     
     
-loader = PDFLoader("app/rag/loader/data/pdf")
-
-documents = loader.load()
-
-print(len(documents))
-print(documents[0].metadata)
-print(documents[0].page_content[:500])
