@@ -9,7 +9,7 @@ from datetime import timedelta,date
 from app.utils.dashboard import calculate_streak,calculate_longest_streak
 
 
-dashboard_router=APIRouter(prefix="/u",tags="Dashboard")
+dashboard_router=APIRouter(prefix="/u",tags=["Dashboard"])
 
 @dashboard_router.get("/",response_model=DashboardSummaryResponse)
 def get_summary(current_user:User=Depends(get_current_user),db:Session=Depends(get_db)):
@@ -146,4 +146,4 @@ def get_muscle_distribution(current_user: User = Depends(get_current_user),db: S
         "muscle_distribution": muscle_distribution
     }
     
-@dashboard_router.get("/")
+# @dashboard_router.get("/")

@@ -1,7 +1,7 @@
 from pydantic import BaseModel,Field
 from enum import Enum
 from typing import List
-from workout import RecentWorkoutResponse
+from app.schemas.workout import RecentWorkoutResponse
 from datetime import datetime
 
 class LatestWeightResponse(BaseModel):
