@@ -55,7 +55,7 @@ def verify_user(form_data:OAuth2PasswordRequestForm=Depends(),db:Session=Depends
         "token_type": "bearer"
     }
     
-# def verify_user(user:UserLogin,db:Session=Depends(get_db)):
+def verify_user(user:UserLogin,db:Session=Depends(get_db)):
     
     existing_user=db.query(User).filter(User.email==user.email).first()
     
@@ -88,14 +88,3 @@ def get_me(current_user: User = Depends(get_current_user)):
         "email": current_user.email
     }
     
-# @auth_router.get("/test-token/{token}")
-# def test_token(token: str):
-#     return decode_access_token(token)
-
-
-# from app.security import oauth2_scheme
-
-# @auth_router.get("/debug")
-# def debug(token: str = Depends(oauth2_scheme)):
-#     print("TOKEN RECEIVED:", token)
-#     return {"token": token}
