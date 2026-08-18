@@ -7,7 +7,6 @@ from app.database import get_db
 from typing import List
 from datetime import timedelta,date
 from app.utils.dashboard import calculate_streak,calculate_longest_streak
-from backend.app.services.dashboard_service import InsightService
 
 
 dashboard_router=APIRouter(prefix="/u",tags=["Dashboard"])
@@ -147,5 +146,5 @@ def get_muscle_distribution(current_user: User = Depends(get_current_user),db: S
         "muscle_distribution": muscle_distribution
     }
     
-@dashboard_router.get("/ai-insight")
-def get_ai_insight(current_user: User = Depends(get_current_user),db: Session = Depends(get_db))
+# @dashboard_router.get("/ai-insight")
+# def get_ai_insight(current_user: User = Depends(get_current_user),db: Session = Depends(get_db)):

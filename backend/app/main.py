@@ -10,6 +10,7 @@ from app.routers.weightlog import weight_log_router
 from app.routers.exercise import exercise_router
 from app.routers.workoutexercise import workout_exercise_router
 from app.routers.dashboard import dashboard_router
+from app.routers.cv import cv
 
 
 app=FastAPI()
@@ -30,7 +31,7 @@ app.include_router(weight_log_router)
 app.include_router(exercise_router)
 app.include_router(workout_exercise_router)
 app.include_router(dashboard_router)
-
+app.include_router(cv)
 
 
 

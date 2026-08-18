@@ -42,7 +42,6 @@ HIP_SHOULDER_GAP_THRESHOLD = 20
 ASCENT_START_THRESHOLD = 3
 
 INITIAL_KNEE_ANGLE = 180
-DEPTH_TOLERANCE = 0.02
 
 
 class Squat:
@@ -138,7 +137,7 @@ class Squat:
 
         _, hip, knee, _ = self._get_side_landmarks(pose)
 
-        if hip.y < knee.y - DEPTH_TOLERANCE:
+        if hip.y > knee.y :
             self.live_feedback.add("Go Lower")
             return False
 
@@ -231,3 +230,54 @@ class Squat:
         self._check_form(pose)
 
         self._count_rep(pose)
+        
+        
+# import cv2
+
+# from app.cv.camera import Camera
+# from app.cv.pose_estimator import PoseEstimator
+# from app.cv.landmark_processor import LandmarkProcessor
+# from app.cv.drawing import PoseDrawer
+# from app.cv.exercises.squat import Squat
+
+
+# camera = Camera("app/cv/testfile.mp4")
+
+# pose_estimator = PoseEstimator()
+# landmark_processor = LandmarkProcessor()
+# pose_drawer = PoseDrawer()
+
+# squat = Squat("LEFT")
+
+# while True:
+
+#     frame = camera.read_frame()
+
+#     results = pose_estimator.detect(frame)
+
+#     if pose_estimator.has_person(results):
+
+#         landmarks = pose_estimator.get_landmarks(results)
+
+#         pose_data = landmark_processor.process(landmarks)
+
+#         squat.update(pose_data)
+
+#     frame = pose_drawer.draw_pose(frame, results)
+    
+#     print(
+#         f"State: {squat.state} | "
+#         f"Knee: {squat.knee_angle:.1f} | "
+#         f"Hip: {squat.hip_angle:.1f} | "
+#         f"Reps: {squat.rep_count} | "
+#         f"Feedback: {squat.live_feedback}"
+#     )
+
+#     cv2.imshow("Squat Test", frame)
+
+#     if cv2.waitKey(25) & 0xFF == ord("q"):
+#         print(squat.session_stats)
+#         break
+    
+# camera.release()
+# cv2.destroyAllWindows()
