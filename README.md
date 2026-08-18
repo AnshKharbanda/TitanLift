@@ -25,9 +25,7 @@ Build a virtual fitness coach that can:
 
 ### Frontend
 
-* Next.js
-* TypeScript
-* Tailwind CSS
+
 
 ### Backend
 
@@ -41,7 +39,7 @@ Build a virtual fitness coach that can:
 
 ### AI & Machine Learning
 
-* OpenAI / Gemini API
+* GROQ API
 * Recommendation Engine
 * RAG (Future Phase)
 
@@ -57,21 +55,6 @@ Build a virtual fitness coach that can:
 * CI/CD
 * Cloud Deployment
 
----
-
-This project is designed to strengthen knowledge in:
-
-* Full-Stack Development
-* Backend Engineering
-* Database Design
-* Authentication & Security
-* AI Integration
-* Machine Learning
-* Computer Vision
-* System Design
-* DevOps
-
----
 
 ## Author
 
