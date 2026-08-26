@@ -43,3 +43,11 @@ class UserResponse(BaseModel):
 class UserLogin(BaseModel):
     email:EmailStr
     password:str
+    
+    
+class UserUpdate(BaseModel):
+    name: str
+    age: int
+    height: float
+    gender: str
+    goal: str | None = None

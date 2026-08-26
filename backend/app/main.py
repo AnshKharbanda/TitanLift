@@ -12,7 +12,7 @@ from app.routers.workoutexercise import workout_exercise_router
 from app.routers.dashboard import dashboard_router
 from app.routers.cv import cv_router
 from app.routers.coach import coach_router
-
+from app.routers.progress import progress_router
 
 
 from app.rag.build_pipeline import build_rag_pipeline
@@ -38,6 +38,7 @@ app.include_router(workout_exercise_router)
 app.include_router(dashboard_router)
 app.include_router(cv_router)
 app.include_router(coach_router)
+app.include_router(progress_router)
 
 
 @app.on_event("startup")
