@@ -1,6 +1,8 @@
+import os
 import pickle
 
-from app.rag.llm.ollama_llm import OllamaLLM
+from app.rag.llm.groq_llm import GroqLLM
+
 from app.rag.vector_store.faiss_store import FAISSStore
 
 from app.rag.retrieval.dense_retriever import DenseRetriever
@@ -18,7 +20,7 @@ from app.rag.pipeline.rag_pipeline import RAGPipeline
 
 def build_rag_pipeline(
     index_path: str,
-    chunks_path: str
+    chunks_path: str,
 ) -> RAGPipeline:
 
     # --------------------------------
@@ -30,16 +32,29 @@ def build_rag_pipeline(
 
 
     # --------------------------------
-    # 2. LLM
+    # 2. Groq LLM
     # --------------------------------
 
-    llm = OllamaLLM(
-        model_name="qwen3:4b"
+    api_key = os.getenv("GROQ_API_KEY")
+
+    if not api_key:
+        raise RuntimeError(
+            "GROQ_API_KEY is not configured."
+        )
+
+    groq_model = os.getenv(
+        "GROQ_MODEL",
+        "openai/gpt-oss-120b",
+    )
+
+    llm = GroqLLM(
+        api_key=api_key,
+        model_name=groq_model,
     ).get_model()
 
 
     # --------------------------------
-    # 3. Load FAISS vector store
+    # 3. Load FAISS
     # --------------------------------
 
     faiss_store = FAISSStore()
@@ -55,33 +70,33 @@ def build_rag_pipeline(
 
     dense_retriever = DenseRetriever(
         vector_store=vector_store,
-        k=10
+        k=10,
     )
 
 
     # --------------------------------
-    # 5. BM25 retriever
+    # 5. BM25
     # --------------------------------
 
     bm25_retriever = BM25Retriever(
         documents=documents,
-        k=10
+        k=10,
     )
 
 
     # --------------------------------
-    # 6. Hybrid retriever
+    # 6. Hybrid retrieval
     # --------------------------------
 
     hybrid_retriever = HybridRetriever(
         dense_retriever=dense_retriever,
         bm25_retriever=bm25_retriever,
-        k=10
+        k=10,
     )
 
 
     # --------------------------------
-    # 7. Cross-encoder reranker
+    # 7. Reranker
     # --------------------------------
 
     reranker = CrossEncoderReranker(
@@ -115,15 +130,13 @@ def build_rag_pipeline(
 
 
     # --------------------------------
-    # 11. Complete RAG pipeline
+    # 11. Pipeline
     # --------------------------------
 
-    pipeline = RAGPipeline(
+    return RAGPipeline(
         query_rewriter=query_rewriter,
         retriever=hybrid_retriever,
         reranker=reranker,
         context_builder=context_builder,
-        generator=generator
+        generator=generator,
     )
-
-    return pipeline

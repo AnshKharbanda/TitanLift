@@ -9,11 +9,11 @@ class RAGPipeline:
 
     def __init__(
         self,
-        query_rewriter: QueryRewriter,
-        retriever: HybridRetriever,
-        reranker: CrossEncoderReranker,
-        context_builder: ContextBuilder,
-        generator: RAGGenerator
+        query_rewriter,
+        retriever,
+        reranker,
+        context_builder,
+        generator,
     ):
         self.query_rewriter = query_rewriter
         self.retriever = retriever
@@ -21,34 +21,72 @@ class RAGPipeline:
         self.context_builder = context_builder
         self.generator = generator
 
-    def run(self, query: str) -> str:
+
+    def retrieve_context(
+        self,
+        query: str,
+    ) -> str:
 
         if not query.strip():
-            raise ValueError("Query cannot be empty.")
+            raise ValueError(
+                "Query cannot be empty."
+            )
 
-        # 1. Rewrite query for better retrieval
-        rewritten_query = self.query_rewriter.rewrite(query)
-
-        # 2. Hybrid retrieval
-        retrieved_documents = self.retriever.retrieve(
-            rewritten_query
+        rewritten_query = (
+            self.query_rewriter.rewrite(
+                query
+            )
         )
 
-        # 3. Rerank retrieved candidates
-        reranked_documents = self.reranker.rerank(
-            rewritten_query,
-            retrieved_documents
+        retrieved_documents = (
+            self.retriever.retrieve(
+                rewritten_query
+            )
         )
 
-        # 4. Construct LLM context
-        context = self.context_builder.build(
-            reranked_documents
+        reranked_documents = (
+            self.reranker.rerank(
+                rewritten_query,
+                retrieved_documents,
+            )
         )
 
-        # 5. Generate answer using ORIGINAL user query
-        answer = self.generator.generate(
+        context = (
+            self.context_builder.build(
+                reranked_documents
+            )
+        )
+
+        return context
+
+
+    def generate(
+        self,
+        query: str,
+        context: str,
+    ) -> str:
+
+        if not query.strip():
+            raise ValueError(
+                "Query cannot be empty."
+            )
+
+        return self.generator.generate(
             query=query,
-            context=context
+            context=context,
         )
 
-        return answer
+
+    def run(
+        self,
+        query: str,
+    ) -> str:
+
+        context = self.retrieve_context(
+            query
+        )
+
+        return self.generate(
+            query=query,
+            context=context,
+        )

@@ -1,6 +1,6 @@
 from fastapi import APIRouter,Depends,HTTPException
 from sqlalchemy.orm import Session
-from app.schemas.workoutexercise import WorkoutExerciseCreate,WorkoutExerciseResponse
+from app.schemas.workoutexercise import WorkoutExerciseCreate,WorkoutExerciseResponse,WorkoutExerciseUpdate
 from app.security import get_current_user
 from app.models import WorkoutExercise,User,Workout,Exercise
 from app.database import get_db
@@ -48,6 +48,61 @@ def workout_exercises(workout_id:int,current_user:User=Depends(get_current_user)
     exercises=db.query(WorkoutExercise).filter(WorkoutExercise.workout_id==workout_id).all()
     
     return exercises
+
+@workout_exercise_router.patch(
+    "/{workout_id}/{exercise_id}",
+    response_model=WorkoutExerciseResponse
+)
+def update_exercise_in_workout(
+    workout_id: int,
+    exercise_id: int,
+    update_data: WorkoutExerciseUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    workout = (
+        db.query(Workout)
+        .filter(
+            Workout.id == workout_id,
+            Workout.user_id == current_user.id
+        )
+        .first()
+    )
+
+    if workout is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Workout Not Found"
+        )
+
+    workout_exercise = (
+        db.query(WorkoutExercise)
+        .filter(
+            WorkoutExercise.workout_id == workout_id,
+            WorkoutExercise.exercise_id == exercise_id
+        )
+        .first()
+    )
+
+    if workout_exercise is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Exercise Not found in Workout"
+        )
+
+    if update_data.sets is not None:
+        workout_exercise.sets = update_data.sets
+
+    if update_data.reps is not None:
+        workout_exercise.reps = update_data.reps
+
+    if update_data.weight is not None:
+        workout_exercise.weight = update_data.weight
+
+    db.commit()
+    db.refresh(workout_exercise)
+
+    return workout_exercise
 
 @workout_exercise_router.delete("/{workout_id}/{exercise_id}",response_model=List[WorkoutExerciseResponse])
 def delete_exercise(workout_id:int,exercise_id:int,current_user:User=Depends(get_current_user),db:Session=Depends(get_db)):

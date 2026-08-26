@@ -7,7 +7,7 @@ class MuscleGroup(str,Enum):
     TRICEPS="TRICEPS"
     LEGS="LEGS"
     BACK="BACK"
-    SHOULDER="SHOULDER"
+    SHOULDERS="SHOULDERS"
     ABS="ABS"
 
 class ExerciseCreate(BaseModel):

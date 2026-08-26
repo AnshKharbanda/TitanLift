@@ -10,7 +10,12 @@ from app.routers.weightlog import weight_log_router
 from app.routers.exercise import exercise_router
 from app.routers.workoutexercise import workout_exercise_router
 from app.routers.dashboard import dashboard_router
-from app.routers.cv import cv
+from app.routers.cv import cv_router
+from app.routers.coach import coach_router
+
+
+
+from app.rag.build_pipeline import build_rag_pipeline
 
 
 app=FastAPI()
@@ -31,7 +36,19 @@ app.include_router(weight_log_router)
 app.include_router(exercise_router)
 app.include_router(workout_exercise_router)
 app.include_router(dashboard_router)
-app.include_router(cv)
+app.include_router(cv_router)
+app.include_router(coach_router)
+
+
+@app.on_event("startup")
+def startup_event():
+
+    pipeline = build_rag_pipeline(
+        index_path="app/rag/data/storage/faiss_index",
+        chunks_path="app/rag/data/storage/chunks.pkl",
+    )
+
+    app.state.rag_pipeline = pipeline
 
 
 

@@ -1,16 +1,97 @@
-# React + Vite
+# TitanLift Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TitanLift is an AI-powered fitness platform designed to help users train smarter through workout tracking, exercise management, computer-vision form analysis, progress tracking, and personalized AI coaching.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The TitanLift frontend is built with React and Vite and provides the complete user interface for the fitness platform.
 
-## React Compiler
+The application allows users to:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Create and manage workouts
+- Add and manage exercises
+- Track sets, reps, and weight
+- Monitor training progress
+- Track body weight
+- Analyze exercise form using a webcam
+- Store computer-vision analysis sessions
+- Interact with an AI fitness coach
 
-## Expanding the ESLint configuration
+The frontend communicates with a FastAPI backend through REST APIs.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+### Dashboard
+
+The dashboard provides a centralized overview of the user's training activity.
+
+It includes:
+
+- Workout statistics
+- Recent workouts
+- Training streak
+- Longest training streak
+- Weight progress
+- Muscle-group distribution
+
+### Workout Management
+
+Users can create and manage workouts directly from the application.
+
+Supported functionality includes:
+
+- Create workouts
+- View workouts
+- Expand workout details
+- Edit workout titles
+- Edit workout notes
+- Add exercises
+- Edit sets
+- Edit reps
+- Edit weight
+- Remove exercises from workouts
+- Delete workouts
+
+### Exercise Library
+
+The exercise library allows users to browse and manage exercises.
+
+Each exercise contains information such as:
+
+- Exercise name
+- Muscle group
+- Description
+
+Users can expand exercise cards to view additional information.
+
+### AI Form Analysis
+
+TitanLift includes webcam-based computer-vision analysis for exercise form.
+
+The AI Analysis interface provides:
+
+- Webcam access
+- Live video feed
+- Session controls
+- Rep counting
+- Form feedback
+- Movement analysis
+- Session statistics
+- Saving analysis results
+
+The basic flow is:
+
+```text
+Webcam
+   ↓
+CVFeed
+   ↓
+Computer Vision Pipeline
+   ↓
+Movement Analysis
+   ↓
+Rep / Form Metrics
+   ↓
+CV Session
+   ↓
+PostgreSQL

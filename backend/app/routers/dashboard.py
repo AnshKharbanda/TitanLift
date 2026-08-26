@@ -71,7 +71,7 @@ def get_streak(current_user:User=Depends(get_current_user),db:Session=Depends(ge
     
     workouts=db.query(Workout).filter(Workout.user_id==user_id).order_by(Workout.created_at.desc())
     
-    latest_workout=workouts.first()
+    last_workout=workouts.first()
     
     workouts=workouts.all()
     
@@ -88,7 +88,7 @@ def get_streak(current_user:User=Depends(get_current_user),db:Session=Depends(ge
         
     return {
         "current_streak":current_streak,
-        "latest_workout":latest_workout.created_at if latest_workout else None
+        "last_workout":last_workout.created_at if last_workout else None
     }
         
         
@@ -125,7 +125,7 @@ def get_muscle_distribution(current_user: User = Depends(get_current_user),db: S
     exercises = db.query(Exercise).filter(Exercise.id.in_(exercise_ids)).all()
 
     # lookup table
-    exercise_lookup = {exercise.id: exercise.muscle_group.value for exercise in exercises}
+    exercise_lookup = {exercise.id: exercise.muscle_group for exercise in exercises}
 
     muscle_distribution = {
         "CHEST": 0,

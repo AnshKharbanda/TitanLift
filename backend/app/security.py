@@ -13,7 +13,7 @@ pwd_context=CryptContext(schemes=["bcrypt"],deprecated="auto")
 # jwt constants
 SECRET_KEY = "titanlift-super-secret-key"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 120
 
 def hash_password(password:str):
     return pwd_context.hash(password)
