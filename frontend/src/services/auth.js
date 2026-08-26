@@ -51,3 +51,13 @@ export async function registerUser(userData) {
 
   return response.data;
 }
+
+
+export async function updateProfile(data) {
+  const response = await api.put(
+    "/auth/me",
+    data
+  );
+
+  return response.data;
+}

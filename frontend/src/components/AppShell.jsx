@@ -121,7 +121,9 @@ function AppShell({
         } lg:translate-x-0`}
       >
 
-        {/* Logo */}
+        {/* =================================================
+            LOGO
+        ================================================= */}
 
         <div className="flex h-20 items-center justify-between px-6">
 
@@ -130,15 +132,11 @@ function AppShell({
             className="flex items-center gap-3"
           >
 
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-lime-400/30 bg-lime-400/10">
-
-              <Dumbbell
-                size={18}
-                className="text-lime-400"
-              />
-
-            </div>
-
+            <img
+              src="/logo.png"
+              alt="TitanLift"
+              className="h-10 w-auto object-contain"
+            />
 
             <span className="text-lg font-black tracking-[0.16em]">
               TITAN
@@ -163,7 +161,9 @@ function AppShell({
         </div>
 
 
-        {/* Navigation */}
+        {/* =================================================
+            NAVIGATION
+        ================================================= */}
 
         <nav className="flex-1 overflow-y-auto px-3 py-6">
 

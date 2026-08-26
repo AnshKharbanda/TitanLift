@@ -13,6 +13,8 @@ import Workouts from "./pages/Workouts";
 import Exercises from "./pages/Exercises";
 import AIAnalysis from "./pages/AIAnalysis";
 import AICoach from "./pages/AICoach";
+import Progress from "./pages/Progress";
+import Settings from "./pages/Settings";
 
 
 function App() {
@@ -56,8 +58,18 @@ function App() {
         />
 
         <Route
+         path="/progress"
+         element={<Progress />}
+        />
+
+        <Route
            path="/coach"
            element={<AICoach/>}
+        />
+
+        <Route
+          path="/settings"
+          element={<Settings />}
         />
 
         {/* Keep this LAST */}

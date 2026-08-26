@@ -166,10 +166,8 @@ function Home() {
         <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
           {/* Logo */}
 
-          <a href="/" className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-lime-400/50 bg-lime-400/10">
-              <Dumbbell size={19} className="text-lime-400" />
-            </div>
+          <a href="/" className="flex items-center">
+            <img src="/logo.png" alt="TitanLift" className="h-10 w-auto object-contain" />
 
             <span className="text-xl font-black tracking-[0.18em]">
               TITAN<span className="text-lime-400">LIFT</span>
@@ -455,6 +453,139 @@ function Home() {
                   );
                 })}
               </div>
+            </div>
+          </div>
+        </section>
+        {/* ================= PRICING ================= */}
+
+        <section
+          id="pricing"
+          className="px-6 py-28 lg:px-10"
+        >
+          <div className="mx-auto max-w-6xl">
+
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-xs font-bold tracking-[0.3em] text-lime-400">
+                SIMPLE PRICING
+              </p>
+
+              <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+                Choose your
+                <br />
+                <span className="text-white/40">
+                  level of commitment.
+                </span>
+              </h2>
+
+              <p className="mt-5 text-sm leading-6 text-white/40">
+                Start training with TitanLift for free and upgrade
+                when you are ready for more advanced features.
+              </p>
+            </div>
+
+            <div className="mt-16 grid gap-6 lg:grid-cols-3">
+
+              <div className="flex flex-col rounded-3xl border border-white/[0.07] bg-[#0b0d0d] p-7">
+                <p className="text-xs font-bold tracking-[0.2em] text-white/40">
+                  FREE
+                </p>
+                <h3 className="mt-4 text-2xl font-black">Starter</h3>
+                <p className="mt-3 min-h-[48px] text-sm leading-6 text-white/40">
+                  Everything you need to start tracking your training.
+                </p>
+                <div className="mt-7">
+                  <span className="text-4xl font-black">₹0</span>
+                  <span className="ml-2 text-sm text-white/30">/ forever</span>
+                </div>
+                <div className="mt-7 space-y-3 text-sm text-white/55">
+                  {[
+                    "Workout tracking",
+                    "Exercise library",
+                    "Basic progress tracking",
+                    "Training history",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3">
+                      <span className="h-1.5 w-1.5 rounded-full bg-lime-400" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="/signup"
+                  className="mt-8 flex items-center justify-center gap-2 rounded-full border border-white/10 px-5 py-3.5 text-sm font-bold text-white/80 transition hover:border-lime-400/40 hover:text-lime-400"
+                >
+                  Get Started
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+
+              <div className="relative flex flex-col rounded-3xl border border-lime-400/40 bg-[#0b0d0d] p-7 shadow-[0_0_40px_rgba(163,230,53,0.06)]">
+                <div className="absolute right-6 top-6 rounded-full bg-lime-400 px-3 py-1 text-[9px] font-black tracking-[0.15em] text-black">
+                  RECOMMENDED
+                </div>
+                <p className="text-xs font-bold tracking-[0.2em] text-lime-400">PRO</p>
+                <h3 className="mt-4 text-2xl font-black">Performance</h3>
+                <p className="mt-3 min-h-[48px] text-sm leading-6 text-white/40">
+                  Advanced tools for athletes who want deeper insights.
+                </p>
+                <div className="mt-7">
+                  <span className="text-4xl font-black">₹499</span>
+                  <span className="ml-2 text-sm text-white/30">/ month</span>
+                </div>
+                <div className="mt-7 space-y-3 text-sm text-white/55">
+                  {[
+                    "Everything in Starter",
+                    "AI form analysis",
+                    "Advanced progress insights",
+                    "Personalized AI Coach",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3">
+                      <span className="h-1.5 w-1.5 rounded-full bg-lime-400" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="/signup"
+                  className="mt-8 flex items-center justify-center gap-2 rounded-full bg-lime-400 px-5 py-3.5 text-sm font-bold text-black transition hover:bg-lime-300"
+                >
+                  Start Pro
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+
+              <div className="flex flex-col rounded-3xl border border-white/[0.07] bg-[#0b0d0d] p-7">
+                <p className="text-xs font-bold tracking-[0.2em] text-white/40">ELITE</p>
+                <h3 className="mt-4 text-2xl font-black">Titan</h3>
+                <p className="mt-3 min-h-[48px] text-sm leading-6 text-white/40">
+                  The complete TitanLift experience for serious athletes.
+                </p>
+                <div className="mt-7">
+                  <span className="text-4xl font-black">₹999</span>
+                  <span className="ml-2 text-sm text-white/30">/ month</span>
+                </div>
+                <div className="mt-7 space-y-3 text-sm text-white/55">
+                  {[
+                    "Everything in Performance",
+                    "Advanced AI coaching",
+                    "Long-term performance analysis",
+                    "Priority features",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3">
+                      <span className="h-1.5 w-1.5 rounded-full bg-lime-400" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="/signup"
+                  className="mt-8 flex items-center justify-center gap-2 rounded-full border border-white/10 px-5 py-3.5 text-sm font-bold text-white/80 transition hover:border-lime-400/40 hover:text-lime-400"
+                >
+                  Choose Titan
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+
             </div>
           </div>
         </section>
